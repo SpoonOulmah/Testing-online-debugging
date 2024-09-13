@@ -4,6 +4,6 @@ class Dumb {
   var variable = 'mad;';
 
   function() {
-    debugPrint('${variable}');
+    debugPrint(variable);
   }
 }

@@ -34,12 +34,9 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: flutter build ios --release --no-codesign
-      - name: Upload build artifacts for IOS
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifacts
-          path: ./build/output
-
+      - name: Build iOS app
+        run: flutter build ios --release
+        
   build_appbundle:
     name: Build Flutter (Android)
     needs: [flutter_test]
@@ -54,9 +51,8 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build appbundle
-      - name: Upload build artifacts for Android
-        uses: actions/upload-artifact@v3
+      - run: flutter build apk --release
+      - uses: actions/upload-artifact@v3
         with:
-          name: build-artifacts
-          path: ./build/output
+          name: android-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
